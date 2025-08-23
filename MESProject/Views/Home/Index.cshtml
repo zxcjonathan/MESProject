@@ -1,0 +1,62 @@
+﻿@model IEnumerable<MESProject.Models.WorkOrder>
+
+@{
+    ViewData["Title"] = "MES 儀表板";
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="text-center">
+    <h1 class="display-4">MES 儀表板</h1>
+    <p>這是您的MES專案初版。下面是工單數據。</p>
+</div>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">新增工單</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.WorkOrderId)</th>
+            <th>@Html.DisplayNameFor(model => model.ProductCode)</th>
+            <th>@Html.DisplayNameFor(model => model.Quantity)</th>
+            <th>@Html.DisplayNameFor(model => model.PlannedStartTime)</th>
+            <th>@Html.DisplayNameFor(model => model.ActualStartTime)</th>
+            <th>@Html.DisplayNameFor(model => model.CompletionTime)</th>
+            <th>@Html.DisplayNameFor(model => model.ProductionLine)</th>
+            <th>@Html.DisplayNameFor(model => model.Notes)</th>
+            <th>@Html.DisplayNameFor(model => model.Status)</th>
+            <th>@Html.DisplayNameFor(model => model.CreatedDate)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.WorkOrderId)</td>
+                <td>@Html.DisplayFor(modelItem => item.ProductCode)</td>
+                <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                <td>@Html.DisplayFor(modelItem => item.PlannedStartTime)</td>
+                <td>@Html.DisplayFor(modelItem => item.ActualStartTime)</td>
+                <td>@Html.DisplayFor(modelItem => item.CompletionTime)</td>
+                <td>@Html.DisplayFor(modelItem => item.ProductionLine)</td>
+                <td>@Html.DisplayFor(modelItem => item.Notes)</td>
+                <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                <td>@Html.DisplayFor(modelItem => item.CreatedDate)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.WorkOrderId">編輯</a> |
+                    <a asp-action="Details" asp-route-id="@item.WorkOrderId">詳細</a> |
+                    <a asp-action="Delete" asp-route-id="@item.WorkOrderId">刪除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
